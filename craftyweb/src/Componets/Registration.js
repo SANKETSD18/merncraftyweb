@@ -47,7 +47,7 @@ const Help = () => {
             toast.error("Password does not match !");
         }
         else {
-            toast.success("Registration successful");
+            // toast.success("Registration successful");
             await addUser(user);
         }
     }
@@ -85,10 +85,6 @@ const Help = () => {
                 </form>
                 <ToastContainer position="top-center" />
             </div>
-
-
-
-
         </>
     )
 };

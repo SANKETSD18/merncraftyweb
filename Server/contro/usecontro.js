@@ -2,16 +2,22 @@ import User from "../model/Schema.js";
 const addUser = async (req, res) => {
     const user = req.body;
     const newUser = new User(user);
-    try {
-        const userExist = await User.findOne({ email: email });
-        if (userExist) {
-            res.status(422).json("Email already Exist");
 
-        }
+
+    const existingData = await User.findOne({ email: user.email });
+    if (existingData) {
+        return res.status(400).send('Email already exists. Please try another email.');
+    }
+
+    try {
         await newUser.save();
-        res.status(201).json(newUser);
+        return res.status(200).send('Data successfully inserted into MongoDB.');
+        // res.status(201).json(newUser);
+        // await newUser.save();
+        // res.send();
     }
     catch (err) {
+        // return res.status(500).send('Error inserting data into MongoDB.');
         res.status(409).json({ msg: err.msg });
     }
 
@@ -27,15 +33,14 @@ const SignIn = async (req, res) => {
             return res.status(400).json({ error: "plz filles the data" });
         }
         const userlogin = await User.findOne({ email: email, password: password });
-        // console.log(userlogin.name);
-        console.log(userlogin);
-            if (!userlogin) {
+        console.log(userlogin.name);
+        // console.log(userlogin);
+        if (!userlogin) {
             res.status(400).json({ message: "Erro in Sign in" })
         } else {
             console.log(userlogin);
-            // res.status(200).json({ message: "user Signin Successfully" })
             res.status(200).json({ message: "user Signin Successfully" })
-              }
+        }
     }
 
     catch (e) {

@@ -18,7 +18,7 @@ const addUser = async (data) => {
 const checkUser = async (data) => {
     try {
         const response = await axios.post(`${URL}/SignIn`, data)
-        console.log(response);
+        return response;
     }
     catch (error) {
         console.log(error);

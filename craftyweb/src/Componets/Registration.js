@@ -2,16 +2,18 @@ import React, { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { addUser } from './api'
+import { useNavigate } from 'react-router-dom';
 
 
 
 const Help = () => {
+    const navigate = useNavigate();
     const [user, setUser] = useState({
-        name: " ",
-        email: " ",
-        phone: " ",
-        password: " ",
-        cwrpassword: " ",
+        name: "",
+        email: "",
+        phone: "",
+        password: "",
+        cwrpassword: "",
     });
     let name, value;
     const inputs = (event) => {
@@ -48,7 +50,20 @@ const Help = () => {
         }
         else {
             // toast.success("Registration successful");
-            await addUser(user);
+            let res = await addUser(user);
+            if (res.data.success) {
+                toast.success("Login Successfull", {
+                    autoClose: 1000
+                });
+                setTimeout(() => {
+                    navigate('/');
+                }, 1500);                
+            }
+            else{
+                toast.error(res.data.message, {
+                    autoClose: 1000
+                });
+            }
         }
     }
     return (

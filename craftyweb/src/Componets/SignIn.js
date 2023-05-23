@@ -7,8 +7,8 @@ import { useNavigate } from 'react-router-dom';
 const SignIn = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState({
-        email: " ",
-        password: " ",
+        email: "",
+        password: "",
     });
     let name, value;
     const inputs = (event) => {
@@ -34,10 +34,21 @@ const SignIn = () => {
             toast.error("Password should be minimum 8 characters!");
         }
         else {
-
-            toast.success("Registration successful");
-            checkUser(user);
-            // navigate('/')
+            let res = await checkUser(user);
+            console.log(res);
+            if (res.data.success) {
+                toast.success("Login Successfull", {
+                    autoClose: 1000
+                });
+                setTimeout(() => {
+                    navigate('/');
+                }, 1500);                
+            }
+            else{
+                toast.error(res.data.message, {
+                    autoClose: 1000
+                });
+            }
         }
 
     }

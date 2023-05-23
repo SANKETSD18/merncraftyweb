@@ -24,7 +24,7 @@ const Home = () => {
 
 
 
-          <Homecard img="https://cdn.pixabay.com/photo/2023/01/05/21/32/film-camera-7699766_960_720.jpg " cardname="Camera" />
+          <Homecard img="https://cdn.pixabay.com/photo/2023/01/05/21/32/film-camera-7699766_960_720.jpg " link="/Camera" cardname="Camera" />
 
 
           <Homecard img="https://cdn.pixabay.com/photo/2021/06/03/09/00/watch-6306447_960_720.jpg" link="/Watches" cardname="Watches" />
